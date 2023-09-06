@@ -1,0 +1,15 @@
+.bar {
+  width: 20px;
+  background: rgb(100, 185, 205);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  justify-content: flex-end;
+  transition-duration: 300ms;
+  transition-property: height;
+  transition-timing-function: ease-in;
+}
+
+.test {
+  background-color: #60c457;
+}
