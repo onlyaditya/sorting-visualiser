@@ -1,5 +1,3 @@
-import pause from "../utils/pause";
-
 async function insertionSort(arr) {
   const length = arr.length;
   const reel = [];
