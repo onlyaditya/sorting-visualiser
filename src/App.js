@@ -2,7 +2,6 @@ import { useState } from "react";
 import "./App.css";
 import { Navbar } from "./components/Navbar";
 import { Sidebar } from "./components/Sidebar";
-import { MainRoutes } from "./Pages/MainRoutes";
 import { Visualise } from "./Pages/Visualise";
 
 function App() {
@@ -60,13 +59,6 @@ function App() {
           handleReset={handleReset}
           inputValue={inputValue}
         />
-        {/* <MainRoutes
-          inputType={inputType}
-          length={length}
-          algo={algo}
-          speed={speed}
-          arrayInput={array}
-        /> */}
         <Visualise
           inputType={inputType}
           length={length}

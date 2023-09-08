@@ -1,15 +1,14 @@
-import bubbleSort2 from "../algorithms/bubbleSort2";
+import bubbleSort from "../algorithms/bubbleSort";
 import insertionSort from "../algorithms/insertionSort";
-import insertionSort2 from "../algorithms/insertionSort2";
-import selectionSort from "../algorithms/selectionSort2";
+import selectionSort from "../algorithms/selectionSort";
 
 export const sortArray = (algo, array) => {
   const sort =
     algo === "bubble"
-      ? bubbleSort2
+      ? bubbleSort
       : algo === "selection"
       ? selectionSort
-      : insertionSort2;
+      : insertionSort;
 
   return sort([...array]);
 };

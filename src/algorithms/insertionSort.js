@@ -1,20 +1,22 @@
-async function insertionSort(arr) {
-  const length = arr.length;
+const insertionSort = (arr) => {
+  const n = arr.length;
   const reel = [];
 
-  for (let i = 1; i < length; i++) {
-    let currentElement = arr[i];
+  reel.push([null, null, null, 0]);
+  for (let i = 0; i < n; i++) {
     let j = i - 1;
-
-    while (j >= 0 && arr[j] > currentElement) {
-      arr[j + 1] = arr[j];
+    while (j >= 0 && arr[j] > arr[j + 1]) {
+      const temp = arr[j];
+      arr[j] = arr[j + 1];
+      arr[j + 1] = temp;
+      reel.push([j, j + 1, null, null]);
+      reel.push([j, j + 1, [...arr], null]);
       j--;
     }
-
-    arr[j + 1] = currentElement;
+    reel.push([null, null, null, i]);
   }
 
-  return arr;
-}
+  return reel;
+};
 
 export default insertionSort;

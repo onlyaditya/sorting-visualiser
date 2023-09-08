@@ -1,0 +1,33 @@
+.color_desc {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.color_desc div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.color_desc div > div {
+  height: 20px;
+  width: 20px;
+}
+
+.red {
+  background-color: #bb553c;
+}
+
+.blue {
+  background-color: #57b7c4;
+}
+
+.green {
+  background-color: #3cbb53;
+}
+
+.yellow {
+  background-color: #dbdb8a;
+}

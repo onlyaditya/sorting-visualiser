@@ -1,8 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../styles/SortingTabs.module.css";
 import { Bar } from "./Bar";
 import { sortArray } from "../utils/sortArray";
-import pause from "../utils/pause";
+import { ColorDesc } from "./ColorDesc";
+import { stepReel } from "../utils/stepReel";
+import { palyReel } from "../utils/palyReel";
 
 export const SortingTabsTest = ({
   length,
@@ -32,8 +34,10 @@ export const SortingTabsTest = ({
         newArray.push(Math.floor(Math.random() * 40) + 1);
       }
       setArray(newArray);
+      setReel([[null, null, [...newArray], null]]);
     } else {
       setArray(arrayInput);
+      setReel([[null, null, [...arrayInput], null]]);
     }
     setSortedValues([]);
     setCompare([]);
@@ -52,62 +56,29 @@ export const SortingTabsTest = ({
     }
   };
 
-  const handlePlay = async () => {
-    let i = 0;
-
-    while (i < reel.length) {
-      const [x, y, arr, index, min] = reel[i];
-
-      setCompare([x, y]);
-      setSwapEl([]);
-
-      if (min) {
-        setMinValue(min);
-      } else if (i === reel.length - 1) {
-        setMinValue(null);
-      }
-
-      if (sortedValues.includes(index)) {
-        setSortedValues((prev) => prev.filter((el) => el !== index));
-      } else if (index !== null) {
-        setSortedValues((prev) => [...prev, index]);
-      }
-
-      if (arr) {
-        setArray(arr);
-        if (x !== null || y !== null) {
-          setSwapEl([x, y]);
-        }
-      }
-      await pause(speed);
-      i++;
-    }
+  const handlePlay = () => {
+    console.log(reel);
+    palyReel(
+      [reel[0], reel[0], ...reel],
+      setCompare,
+      setSwapEl,
+      setMinValue,
+      setSortedValues,
+      setArray,
+      speed
+    );
   };
 
   const renderReel = (i) => {
-    const [x, y, arr, index, min] = reel[i];
-
-    setCompare([x, y]);
-    setSwapEl([]);
-
-    if (min) {
-      setMinValue(min);
-    } else if (i === reel.length - 1) {
-      setMinValue(null);
-    }
-
-    if (sortedValues.includes(index)) {
-      setSortedValues((prev) => prev.filter((el) => el !== index));
-    } else if (index !== null) {
-      setSortedValues((prev) => [...prev, index]);
-    }
-
-    if (arr) {
-      setArray(arr);
-      if (x !== null || y !== null) {
-        setSwapEl([x, y]);
-      }
-    }
+    stepReel(
+      i,
+      reel,
+      setCompare,
+      setSwapEl,
+      setMinValue,
+      setSortedValues,
+      setArray
+    );
   };
 
   const handleNext = () => {
@@ -132,24 +103,7 @@ export const SortingTabsTest = ({
           );
         })}
       </div>
-      <div className={styles.color_desc}>
-        <div>
-          <div className={styles.red}></div>
-          <p>Compare</p>
-        </div>
-        <div>
-          <div className={styles.blue}></div>
-          <p>Swap</p>
-        </div>
-        <div>
-          <div className={styles.green}></div>
-          <p>Sorted</p>
-        </div>
-        <div>
-          <div className={styles.yellow}></div>
-          <p>Minimum</p>
-        </div>
-      </div>
+      <ColorDesc />
       <div className={styles.sorting_options}>
         <button disabled={sorted} onClick={handleSortArray}>
           Sort
